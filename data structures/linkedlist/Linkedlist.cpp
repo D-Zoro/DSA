@@ -1,30 +1,43 @@
 #include<iostream>
 struct node{
     int data;
-    node *next;
+    node* next;
 };
-int main(){
-    node* first=new node;
-    first->data=20;
+class linkedlist{
+    node* head, *tail;
 
-    node*second=new node;
-    second->data=30;
-
-    node* third=new node;
-    third->data=40;
-
-    first->next=NULL;
-    second->next=first;
-    third->next=second;
-
-    node* temp = third;
-    while(temp){
-        std::cout<<temp->data<<"->";
-        temp=temp->next;
-
+    public:
+    linkedlist(){
+        head=nullptr;
     }
-    std::cout<<"NULL";
-    return 0;
+    void append(int data){
+        node* newnode= new node;
+        newnode->data=data;
+        newnode->next=nullptr;
 
-    
+        if(head=nullptr){
+            head=newnode;
+        }
+        else{
+            head->next=newnode;
+            head=head->next;
+        }
+    }
+    void printnodes(){
+        while(head->next!=nullptr){
+            std::cout<<head<<"->";
+        }
+        std::cout<<"null";
+    }
+};
+
+int main(){
+    linkedlist a;
+    a.append(10);
+    a.append(30);
+    a.append(4);
+    a.printnodes();
+
+    return 0;
 }
+
