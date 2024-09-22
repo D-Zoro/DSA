@@ -1,43 +1,57 @@
 #include<iostream>
 struct node{
     int data;
-    node* next;
+    node *next;
 };
-class linkedlist{
-    node* head, *tail;
 
-    public:
+class linkedlist{
+    node *head;
+public:
     linkedlist(){
         head=nullptr;
     }
-    void append(int data){
-        node* newnode= new node;
-        newnode->data=data;
+    void append(){
+        static int count=1;
+        int datu;
+        std::cout<<"Enter data number "<<count<<std::endl;
+
+        std::cin>>datu;
+        node* newnode=new node;
+        newnode->data=datu;
         newnode->next=nullptr;
 
-        if(head=nullptr){
+        if(head==nullptr){
             head=newnode;
         }
         else{
-            head->next=newnode;
-            head=head->next;
+            newnode->next=head;
+            head=newnode;
         }
+
+    count++;
+        
     }
     void printnodes(){
-        while(head->next!=nullptr){
-            std::cout<<head<<"->";
+        std::cout<<std::endl;
+        node* headu =head;
+        while(headu!=nullptr){
+            std::cout<<headu->data<<"->";
+            headu=headu->next;
         }
-        std::cout<<"null";
+        std::cout<<"NULL\n";
     }
 };
-
 int main(){
     linkedlist a;
-    a.append(10);
-    a.append(30);
-    a.append(4);
+    int n;
+    std::cout<<"Enter the number of elements :";
+    std::cin>>n;
+
+    while(n>=1){
+        a.append();
+        n--;
+    }
     a.printnodes();
-
     return 0;
+    
 }
-
