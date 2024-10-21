@@ -108,10 +108,10 @@ void displayrev(node *head){
 }
 
 node* listconnect(node*head1,node*head2){
-    if(head1=NULL){
+    if(head1==NULL){
         return head2;
     }
-    if(head2=NULL){
+    if(head2==NULL){
         return head1;
     }
     node*temp=head1;
@@ -122,4 +122,31 @@ node* listconnect(node*head1,node*head2){
     head2->prev=temp;
 
     return head1;
+}
+
+void insertb4key(node** head,int data,int key){
+    node*insrtnode=hosanode(data);
+    if(*head==NULL){
+        printf("NO SUCH KEY\n");
+        return;
+    }
+    node*temp =*head;
+    if(temp->data==key){
+        insertstart(head,data);
+        return;//inserting at start only
+    }
+    while(temp->next!=NULL && temp->next->data!=key){
+        temp=temp->next;
+    }
+    if(temp->next==NULL){
+        printf("NO SUCH KEY\n");
+        return;
+    }
+    
+    temp->next->prev=insrtnode;
+    insrtnode->next=temp->next;
+
+    temp->next=insrtnode;
+    insrtnode->prev=temp;
+
 }
